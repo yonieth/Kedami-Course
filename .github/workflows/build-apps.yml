@@ -24,15 +24,15 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Install dependencies & Initialize Capacitor Android
+      - name: Install dependencies & Capacitor CLI
         run: |
           npm install
-          rm -rf android
+          npm install -g @capacitor/cli
+
+      - name: Add Android Platform & Copy Web Assets
+        run: |
           npx cap add android
-          npx cap sync android
+          npx cap copy android
 
       - name: Build Debug APK with Gradle
         working-directory: android
@@ -58,7 +58,7 @@ jobs:
         with:
           node-version: 20
 
-      - name: Fix filename if double extension exists & Build Windows EXE
+      - name: Clean double extension if any & Build Windows EXE
         shell: bash
         run: |
           if [ -f "electron-main.js.js" ]; then mv electron-main.js.js electron-main.js; fi
