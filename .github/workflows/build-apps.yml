@@ -18,15 +18,19 @@ jobs:
         with:
           node-version: 20
 
-      - name: Setup Java JDK 17
+      - name: Setup Java JDK 21
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '21'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
 
       - name: Install dependencies & Initialize Capacitor Android
         run: |
           npm install
+          rm -rf android
           npx cap add android
           npx cap sync android
 
@@ -34,7 +38,7 @@ jobs:
         working-directory: android
         run: |
           chmod +x gradlew
-          ./gradlew assembleDebug
+          ./gradlew assembleDebug --no-daemon
 
       - name: Upload Android APK Artifact
         uses: actions/upload-artifact@v4
@@ -54,8 +58,10 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install dependencies & Build Windows EXE
+      - name: Fix filename if double extension exists & Build Windows EXE
+        shell: bash
         run: |
+          if [ -f "electron-main.js.js" ]; then mv electron-main.js.js electron-main.js; fi
           npm install
           npm run build:win
 
