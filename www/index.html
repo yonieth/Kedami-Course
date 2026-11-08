@@ -47,17 +47,16 @@
     header {
       background: var(--primary);
       color: #fff;
-      padding: 10px 14px;
+      padding: 12px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
+      gap: 10px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      z-index: 30;
-      flex-shrink: 0;
+      z-index: 20;
     }
     .header-title {
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: bold;
       color: var(--accent);
       white-space: nowrap;
@@ -66,13 +65,13 @@
     }
     .toolbar {
       display: flex;
-      gap: 5px;
+      gap: 6px;
       align-items: center;
     }
     .btn {
-      background: rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.12);
       color: #fff;
-      border: 1px solid rgba(255,255,255,0.25);
+      border: 1px solid rgba(255,255,255,0.2);
       padding: 6px 10px;
       border-radius: 6px;
       cursor: pointer;
@@ -84,17 +83,16 @@
       background: var(--card);
       border-bottom: 2px solid var(--border);
       overflow-x: auto;
-      flex-shrink: 0;
     }
     .book-tab {
       flex: 1;
       min-width: max-content;
-      padding: 10px 14px;
+      padding: 12px 16px;
       border: none;
       background: transparent;
       color: var(--text);
       font-weight: 600;
-      font-size: 0.88rem;
+      font-size: 0.92rem;
       cursor: pointer;
       border-bottom: 3px solid transparent;
     }
@@ -110,37 +108,32 @@
       position: relative;
     }
     aside {
-      width: 280px;
+      width: 300px;
       background: var(--card);
       border-right: 1px solid var(--border);
       display: flex;
       flex-direction: column;
       overflow-y: auto;
-      z-index: 20;
       transition: transform 0.25s ease;
-      flex-shrink: 0;
     }
     .search-box {
-      padding: 10px;
+      padding: 12px;
       border-bottom: 1px solid var(--border);
-      background: var(--card);
-      position: sticky;
-      top: 0;
     }
     .search-box input {
       width: 100%;
-      padding: 8px 10px;
+      padding: 9px 12px;
       border-radius: 6px;
       border: 1px solid var(--border);
       background: var(--bg);
       color: var(--text);
-      font-size: 0.9rem;
+      font-size: 0.95rem;
     }
     .chapter-item {
-      padding: 12px 14px;
+      padding: 12px 16px;
       border-bottom: 1px solid var(--border);
       cursor: pointer;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       line-height: 1.4;
     }
     .chapter-item:hover, .chapter-item.active {
@@ -150,34 +143,32 @@
     }
     main {
       flex: 1;
-      padding: 16px 22px;
+      padding: 20px 28px;
       overflow-y: auto;
       font-size: var(--font-size);
-      line-height: 1.8;
-      background: var(--bg);
+      line-height: 1.85;
     }
     .epigraph-box {
       background: rgba(197, 155, 39, 0.1);
       border-left: 4px solid var(--accent);
-      padding: 10px 14px;
-      margin-bottom: 16px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
       border-radius: 6px;
       font-style: italic;
     }
     .section-card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 16px;
-      margin-bottom: 16px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.04);
     }
     .section-card h3 {
       margin-top: 0;
       color: var(--accent);
       border-bottom: 1px solid var(--border);
-      padding-bottom: 6px;
-      font-size: 1.1rem;
+      padding-bottom: 8px;
     }
     .section-content {
       white-space: pre-line;
@@ -186,14 +177,13 @@
       background: rgba(26, 54, 93, 0.08);
       border: 1px dashed var(--accent);
       border-radius: 8px;
-      padding: 14px;
-      margin-top: 14px;
+      padding: 16px;
+      margin-top: 16px;
     }
     .nav-footer {
       display: flex;
       justify-content: space-between;
-      margin: 24px 0 32px;
-      gap: 10px;
+      margin: 28px 0 40px;
     }
     @media (max-width: 768px) {
       aside {
@@ -201,19 +191,19 @@
         top: 0;
         bottom: 0;
         left: 0;
+        z-index: 15;
         transform: translateX(-100%);
-        box-shadow: 4px 0 15px rgba(0,0,0,0.3);
+        box-shadow: 4px 0 12px rgba(0,0,0,0.25);
       }
-      aside.open {
-        transform: translateX(0);
-      }
+      aside.open { transform: translateX(0); }
+      main { padding: 16px; }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div style="display:flex; align-items:center; gap:8px;">
+    <div style="display:flex; align-items:center; gap:10px;">
       <button class="btn" onclick="toggleDrawer()">☰ ማውጫ</button>
       <div class="header-title" id="app-title">የሰንበት ት/ቤት መጻሕፍት</div>
     </div>
@@ -234,46 +224,156 @@
       <div id="chapter-list"></div>
     </aside>
 
-    <main id="reader" onclick="closeDrawerOnMobile()">
-      <div id="reader-content">መጻሕፍቱን በመጫን ላይ...</div>
+    <main id="reader">
+      <div id="reader-content">በመጫን ላይ...</div>
     </main>
   </div>
 
   <script>
-    // Embedded Complete Book Database for offline Android & Windows support
-    const appData = {
-  "app_metadata": {
-    "app_title": "ቀዳማይ ክፍል - የሰንበት ት/ቤት መጻሕፍት",
-    "institution": "በመናገሻ ገነተ ጽጌ ቅዱስ ጊዮርጊስ ቤተ ክርስቲያን ሰንበት ት/ቤት ትምህርት ክፍል",
-    "phone": "0111 55 89 41",
-    "po_box": "27314",
-    "language": "am",
-    "total_books": 4
-  },
-  "books": [
-    {
-      "id": "temherte_haymanot",
-      "title": "ትምህርተ ሃይማኖት ርትዕት",
-      "subtitle": "ለቀዳማይ ክፍል የተዘጋጀ",
-      "epigraph": "«ለቅዱሳን አንድ ጊዜ ፈጽሞ ስለተሰጠ ሃይማኖት እንድትጋደሉ እየመከርኳችሁ እጽፍላችሁ ዘንድ ግድ ሆነብኝ» (የይሁዳ መልዕክት 1÷3)",
-      "publisher": "በመናገሻ ገነተ ጽጌ ቅዱስ ጊዮርጊስ ቤተ ክርስቲያን ሰንበት ት/ቤት ትምህርት ክፍል የተዘጋጀ",
-      "chapters": [
-        {
-          "chapter_id": "th_ch1",
-          "title": "መግቢያ",
-          "page_start": 1,
-          "sections": [
-            {
-              "heading": "መግቢያ እና የሃይማኖት ትርጉም",
-              "content": "በስመ አብ ወወልድ ወመንፈስ ቅዱስ አሐዱ አምላክ አሜን፡፡\n«ያለ እምነት እግዚአብሔርን ደስ ማሰኘት አይቻልም» (ዕብ. 11÷6)\n\nሃይማኖት፦ «ሀይመነ» አመነ፣ ታመነ ከሚለው የግእዝ ግስ የተገኘ ቃል ሲሆን ትርጉሙም ማመን፣ መታመን፣ ተአማኒነት፣ አመኔታ ማለት ነው፡፡\n\n• ማመን፦ ማለት ከሁሉ በፊት የነበረ፣ ዓለምን አሳልፎ የሚኖር፣ ፍጥረትን ሁሉ የፈጠረ፣ ማንኛውንም ነገር ካለመኖር ወደ መኖር ያመጣ ያስገኘ፤ ለርሱ ግን አምጪ፣ አስገኚ፣ አሳላፊ የሌለው፣ ጥንት፣ ተፍፃሜት የሌለው፣ ምንም ምን የሚሳነው ነገር የሌለው፣ በአንድነት በሦስትነት ጸንቶ ያለ፣ ሁሉን ቻይ የማይለወጥ አምላክ መኖሩን ማመን ነው፡፡\n• መታመን፦ ማለት በልብ (በረቂቅ አእምሮ) ያመኑትን በአንደበት መመስከር፣ መናገር፣ ማመስገን፣ ማምለክ፣ መስገድ፣ መገዛት፣ ለቃሉ ታዛዥ፣ ለመንግሥቱ ተገዥ መሆን በሥራ ሁሉ መግለጥ ማለት ነው፡፡ (ሮሜ. 10÷9)\n• ተአማኒነት፦ ማለት ይደረግልኛል፣ ይሆንልኛል፣ ይፈፀምልኛል ብሎ በፍፁም ልብ በእግዚአብሔር ላይ ተአማኒነት ማድረግ ነው፡፡\n• አመኔታ፦ ተአማኒነት ከሚለው ቃል ጋር በትርጉም ተወራራሽነት አለው፡፡\n\nይኸውም ሃይማኖት ማለት ቅድመ ዓለም የነበረ፣ ፍጥረታትን ሁሉ የፈጠረ፣ ፈጥሮም የሚገዛ፣ ማዕከለ ዓለም ያለ፣ ዓለምን አሳልፎ የሚኖር ምንም የሚሳነው የሌለው፣ ለእርሱ ግን አምጪ፣ አስገኚ አሳላፊ የሌለው በአንድነት በሦስትነት የሚመለክ ዘለዓለማዊ፣ ሁሉን ቻይ አምላክ እንዳለ ማመን ነው፡፡ (ዕብ. 11÷1-40)\n\nሃይማኖት ማለት ፍጡር ፈጣሪውን ለማወቅ ባሰበ ጊዜ፣ እንደ መላእክት በአእምሮ ጠባይዓዊ፣ እንደ እነ አብርሃም በሥነ ፍጥረት ተመራምሮ፣ እንደ ነቢያትና እንደ ሐዋርያት ፊቱን አይቶ ቃል በቃል ተነጋግሮ፣ እንደ ቅዱስ ጳውሎስም በተአምራት ተገልጾለት ተመልሶ እንደሌሎች ምእመናንም በአእምሮ መጽሐፋዊና በተስፋ አረጋግጦ አምላክ እንዳለ የሚያምኑበት እውነተኛ ትምህርት ነው እንጂ እንደ ዕቃ በእጅ የሚጨበጥና የሚዳሰስ፣ እንደ ልብስም የሚለበስ እንደ መብልና እንደ መጠጥ የሚቀመስ አይደለም፡፡ (ዕብ. 11)\n\nስለ እግዚአብሔር በመጽሐፍ ቅዱስ የተነገረውን ሁሉ በልባችን የምናምንበት፣ በአፋችን የምንታመንበት መግለጫ ሃይማኖት ነው፡፡ ሃይማኖት ማለት በዐይን የማይታየውን፣ በእጅ የማይዳሰሰውን የልዑል እግዚአብሔርን ነገር ይህ እንዴት ይሆናል? ማለት ሳይኖር በእግዚአብሔር ዘንድ ሁሉ ይቻላል ብሎ በሙሉ ልብ ማመን፣ ይህንንም በአፍም በመጽሐፍም መመስከር ነው፡፡ በሕገ ልቡና፣ በሕገ ኦሪት፣ በሕገ ወንጌል፣ በሦስቱም ሕግጋት እግዚአብሔር አንድ ነው፡፡ ሃይማኖትም አንዲት ናት፡፡ (ዘዳግ. 6÷4፣ ኤፌ. 4÷5)\n\nሃይማኖት የፍጡር ሕሊና መርምሮ የማይፈጽማት ስለሆነ ምሥጢር ተብላ ትጠራለች፡፡ ይህ ስም ጌታችንና መድኃኒታችን ኢየሱስ ክርስቶስ «...ይህችን ምሥጢር ከዐዋቂዎችና ከጠቢባን ሰውረህ ለሕፃናት ገልጠሃታልና የሰማይና የምድር ገዢ አባቴ ሆይ አመሠግንሃለሁ» ባለ ጊዜ ያወጣላት ስም ነው፡፡ (ማቴ. 11÷25-27)\n\nሃይማኖት ለትሑታን ዕውቀትን ስለምትገልጥ፣ ከዕውቀትም በላይ ስለሆነች በመጽሐፍ ቅዱስ ጥበብ ተብላ ትጠራለች (ምሳ. 9÷1-7፣ ማቴ. 22÷1-12፣ 2ኛ ጢሞ. 3÷14-17)። ሃይማኖት እባቡን ለመርገጥ፣ ጊንጡን ለመጨበጥ፣ መርዝን ለመጨለጥ፣ ዲያብሎስን ድል ለመንሳት፣ አጋንንትን ለመግዛት ኃይልና ሥልጣን ትሰጣለች (ማር. 16÷16-19)። የስናፍጭ ቅንጣት የምታህል ሃይማኖት ያለው ሰው ሾላውን ወርካውን ነቅሎ በወደደው ቦታ ሊተክል፣ ተራራውን ኮረብታውን ፈንቅሎ ወደ ባሕር ሊጥል ይችላል (ማቴ. 17÷20፣ ሉቃ. 17÷6)።\n\nበአጠቃላይ ሃይማኖት የነገረ መለኮትን ትምህርት፣ የአምልኮትን ሥርዓት፣ ከእምነትም የተነሳ የአማኒውን ተጋድሎ ያጠቃልላል (2ኛ ጢሞ. 4÷7፣ ይሁዳ 3÷20)። ሰው በልቡ አምኖ ይጸድቃል፤ በአፉም መስክሮ ይድናል (ሮሜ. 10÷8-10፣ ማቴ. 10÷32-33፣ ሉቃ. 9÷26)። የዘለዓለም ሕይወትንም ያገኛል (ዮሐ. 3÷16-36፣ 5÷24፣ 6÷40-47፣ 8÷51፣ 11÷25-26)። የመንፈስ ቅዱስንም ጸጋ ይቀበላል (የሐዋ. 2÷38፣ ኤፌ. 1÷13-14)。"
+    let appData = null;
+    let currentBookIdx = 0;
+    let currentChapterIdx = 0;
+    let fontSize = 18;
+    const themes = ['light', 'sepia', 'dark'];
+    let themeIdx = 0;
+
+    async function initApp() {
+      const res = await fetch('./senbet_timhirt_bet_books_amharic.json');
+      appData = await res.json();
+      document.getElementById('app-title').innerText = appData.app_metadata.app_title;
+      renderBookTabs();
+      selectBook(0);
+    }
+
+    function renderBookTabs() {
+      const tabs = document.getElementById('book-tabs');
+      tabs.innerHTML = appData.books.map((b, idx) =>
+        `<button class="book-tab ${idx === currentBookIdx ? 'active' : ''}" onclick="selectBook(${idx})">${idx + 1}. ${b.title}</button>`
+      ).join('');
+    }
+
+    function selectBook(bookIdx) {
+      currentBookIdx = bookIdx;
+      currentChapterIdx = 0;
+      renderBookTabs();
+      renderChapters();
+      renderChapterContent();
+    }
+
+    function renderChapters() {
+      const book = appData.books[currentBookIdx];
+      const list = document.getElementById('chapter-list');
+      list.innerHTML = book.chapters.map((ch, idx) =>
+        `<div class="chapter-item ${idx === currentChapterIdx ? 'active' : ''}" onclick="selectChapter(${idx})">
+          ${ch.title}
+        </div>`
+      ).join('');
+    }
+
+    function selectChapter(chIdx) {
+      currentChapterIdx = chIdx;
+      renderChapters();
+      renderChapterContent();
+      if (window.innerWidth <= 768) {
+        document.getElementById('sidebar').classList.remove('open');
+      }
+    }
+
+    function renderChapterContent() {
+      const book = appData.books[currentBookIdx];
+      const ch = book.chapters[currentChapterIdx];
+      const container = document.getElementById('reader-content');
+
+      let html = '';
+      if (currentChapterIdx === 0 && book.epigraph) {
+        html += `<div class="epigraph-box">${book.epigraph}</div>`;
+      }
+
+      html += `<h2>${ch.title}</h2>`;
+      ch.sections.forEach(sec => {
+        html += `
+          <div class="section-card">
+            <h3>${sec.heading}</h3>
+            <div class="section-content">${sec.content}</div>
+          </div>
+        `;
+      });
+
+      if (ch.questions && ch.questions.length) {
+        html += `
+          <div class="questions-box">
+            <h4>የክለሳ ጥያቄዎች፦</h4>
+            <ul>${ch.questions.map(q => `<li>${q}</li>`).join('')}</ul>
+          </div>
+        `;
+      }
+
+      if (currentChapterIdx === book.chapters.length - 1 && book.references) {
+        html += `
+          <div class="section-card">
+            <h3>ዋቢ መጻሕፍት</h3>
+            <ul>${book.references.map(r => `<li>${r}</li>`).join('')}</ul>
+          </div>
+        `;
+      }
+
+      html += `
+        <div class="nav-footer">
+          <button class="btn" style="background:var(--primary)" ${currentChapterIdx === 0 ? 'disabled' : ''} onclick="selectChapter(${currentChapterIdx - 1})">← ቀዳሚ ምዕራፍ</button>
+          <button class="btn" style="background:var(--primary)" ${currentChapterIdx >= book.chapters.length - 1 ? 'disabled' : ''} onclick="selectChapter(${currentChapterIdx + 1})">ቀጣይ ምዕራፍ →</button>
+        </div>
+      `;
+
+      container.innerHTML = html;
+      document.getElementById('reader').scrollTop = 0;
+    }
+
+    function handleSearch(query) {
+      const q = query.trim();
+      if (!q) {
+        renderChapterContent();
+        return;
+      }
+      const results = [];
+      appData.books.forEach((book, bIdx) => {
+        book.chapters.forEach((ch, cIdx) => {
+          ch.sections.forEach(sec => {
+            if (sec.heading.includes(q) || sec.content.includes(q)) {
+              results.push({ bookTitle: book.title, chTitle: ch.title, sec, bIdx, cIdx });
             }
-          ]
-        },
-        {
-          "chapter_id": "th_ch2",
-          "title": "የሃይማኖት ዓላማ (ጥቅም)",
-          "page_start": 3,
-          "sections": [
-            {
-              "heading": "የሃይማኖት 12ቱ ዓላማዎችና ጥቅሞች",
-              "content": "1. አርአያ ፈጣሪ፣ አምሳለ ፈጣሪ የሆነው ሰው ፈጣሪውን እግዚአብሔርን የሚያውቅበት መንገድ ነው፡፡ «ነአምር ከመ ተፈጥረ ዓለም በቃለ እግዚአብሔር ወአስተርአየ ዘኢያስተርኢ ምንትኒ ዘኮነ በሃይማኖት እምኀበ ኢሀሎ ወኮነ እሙነ» (ዘፍጥ. 1÷26፣ ዕብ. 11÷3)።\nየሰው ልጅ እግዚአብሔርን በምን ይመስለዋልና አርአያ ፈጣሪ አምሳለ ፈጣሪ ተባለ ቢሉ፦\n• ሀ. በንጽሐ ጠ
+          });
+        });
+      });
+
+      const container = document.getElementById('reader-content');
+      if (!results.length) {
+        container.innerHTML = `<h3>ለ «${q}» ምንም ውጤት አልተገኘም፡፡</h3>`;
+        return;
+      }
+      container.innerHTML = `<h3>የፍለጋ ውጤቶች (${results.length})፦</h3>` + results.map(r => `
+        <div class="section-card" onclick="selectBook(${r.bIdx}); selectChapter(${r.cIdx});" style="cursor:pointer">
+          <small style="color:var(--muted)">${r.bookTitle} › ${r.chTitle}</small>
+          <h3>${r.sec.heading}</h3>
+          <div class="section-content">${r.sec.content.substring(0, 260)}...</div>
+        </div>
+      `).join('');
+    }
+
+    function toggleDrawer() {
+      document.getElementById('sidebar').classList.toggle('open');
+    }
+
+    function changeFont(delta) {
+      fontSize = Math.min(28, Math.max(14, fontSize + delta));
+      document.documentElement.style.setProperty('--font-size', fontSize + 'px');
+    }
+
+    function cycleTheme() {
+      themeIdx = (themeIdx + 1) % themes.length;
+      document.documentElement.setAttribute('data-theme', themes[themeIdx]);
+    }
+
+    initApp();
+  </script>
+</body>
+</html>
