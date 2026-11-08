@@ -47,16 +47,17 @@
     header {
       background: var(--primary);
       color: #fff;
-      padding: 12px 16px;
+      padding: 10px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 8px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      z-index: 20;
+      z-index: 30;
+      flex-shrink: 0;
     }
     .header-title {
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: bold;
       color: var(--accent);
       white-space: nowrap;
@@ -65,13 +66,13 @@
     }
     .toolbar {
       display: flex;
-      gap: 6px;
+      gap: 5px;
       align-items: center;
     }
     .btn {
-      background: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.15);
       color: #fff;
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.25);
       padding: 6px 10px;
       border-radius: 6px;
       cursor: pointer;
@@ -83,16 +84,17 @@
       background: var(--card);
       border-bottom: 2px solid var(--border);
       overflow-x: auto;
+      flex-shrink: 0;
     }
     .book-tab {
       flex: 1;
       min-width: max-content;
-      padding: 12px 16px;
+      padding: 10px 14px;
       border: none;
       background: transparent;
       color: var(--text);
       font-weight: 600;
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       cursor: pointer;
       border-bottom: 3px solid transparent;
     }
@@ -108,32 +110,37 @@
       position: relative;
     }
     aside {
-      width: 300px;
+      width: 280px;
       background: var(--card);
       border-right: 1px solid var(--border);
       display: flex;
       flex-direction: column;
       overflow-y: auto;
+      z-index: 20;
       transition: transform 0.25s ease;
+      flex-shrink: 0;
     }
     .search-box {
-      padding: 12px;
+      padding: 10px;
       border-bottom: 1px solid var(--border);
+      background: var(--card);
+      position: sticky;
+      top: 0;
     }
     .search-box input {
       width: 100%;
-      padding: 9px 12px;
+      padding: 8px 10px;
       border-radius: 6px;
       border: 1px solid var(--border);
       background: var(--bg);
       color: var(--text);
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
     .chapter-item {
-      padding: 12px 16px;
+      padding: 12px 14px;
       border-bottom: 1px solid var(--border);
       cursor: pointer;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       line-height: 1.4;
     }
     .chapter-item:hover, .chapter-item.active {
@@ -143,32 +150,34 @@
     }
     main {
       flex: 1;
-      padding: 20px 28px;
+      padding: 16px 22px;
       overflow-y: auto;
       font-size: var(--font-size);
-      line-height: 1.85;
+      line-height: 1.8;
+      background: var(--bg);
     }
     .epigraph-box {
       background: rgba(197, 155, 39, 0.1);
       border-left: 4px solid var(--accent);
-      padding: 12px 16px;
-      margin-bottom: 20px;
+      padding: 10px 14px;
+      margin-bottom: 16px;
       border-radius: 6px;
       font-style: italic;
     }
     .section-card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     }
     .section-card h3 {
       margin-top: 0;
       color: var(--accent);
       border-bottom: 1px solid var(--border);
-      padding-bottom: 8px;
+      padding-bottom: 6px;
+      font-size: 1.1rem;
     }
     .section-content {
       white-space: pre-line;
@@ -177,33 +186,35 @@
       background: rgba(26, 54, 93, 0.08);
       border: 1px dashed var(--accent);
       border-radius: 8px;
-      padding: 16px;
-      margin-top: 16px;
+      padding: 14px;
+      margin-top: 14px;
     }
     .nav-footer {
       display: flex;
       justify-content: space-between;
-      margin: 28px 0 40px;
+      margin: 24px 0 32px;
+      gap: 10px;
     }
+    /* Mobile Overlay Drawer */
     @media (max-width: 768px) {
       aside {
         position: absolute;
         top: 0;
         bottom: 0;
         left: 0;
-        z-index: 15;
         transform: translateX(-100%);
-        box-shadow: 4px 0 12px rgba(0,0,0,0.25);
+        box-shadow: 4px 0 15px rgba(0,0,0,0.3);
       }
-      aside.open { transform: translateX(0); }
-      main { padding: 16px; }
+      aside.open {
+        transform: translateX(0);
+      }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div style="display:flex; align-items:center; gap:10px;">
+    <div style="display:flex; align-items:center; gap:8px;">
       <button class="btn" onclick="toggleDrawer()">☰ ማውጫ</button>
       <div class="header-title" id="app-title">የሰንበት ት/ቤት መጻሕፍት</div>
     </div>
@@ -224,8 +235,8 @@
       <div id="chapter-list"></div>
     </aside>
 
-    <main id="reader">
-      <div id="reader-content">በመጫን ላይ...</div>
+    <main id="reader" onclick="closeDrawerOnMobile()">
+      <div id="reader-content">መጻሕፍቱን በመጫን ላይ...</div>
     </main>
   </div>
 
@@ -238,11 +249,21 @@
     let themeIdx = 0;
 
     async function initApp() {
-      const res = await fetch('./senbet_timhirt_bet_books_amharic.json');
-      appData = await res.json();
-      document.getElementById('app-title').innerText = appData.app_metadata.app_title;
-      renderBookTabs();
-      selectBook(0);
+      try {
+        const res = await fetch('./senbet_timhirt_bet_books_amharic.json');
+        if (!res.ok) throw new Error('Network response was not ok');
+        appData = await res.json();
+        document.getElementById('app-title').innerText = appData.app_metadata.app_title;
+        renderBookTabs();
+        selectBook(0);
+      } catch (err) {
+        document.getElementById('reader-content').innerHTML = `
+          <div class="section-card" style="border-color: red;">
+            <h3 style="color: red;">የውሂብ ፋይል ስህተት (Data Error)</h3>
+            <p>የመጻሕፍቱ የውሂብ ፋይል (<strong>senbet_timhirt_bet_books_amharic.json</strong>) በ www/ ፎልደር ውስጥ አልተገኘም ወይም ሊነበብ አልቻለም። እባክዎ ፋይሉ መኖሩን ያረጋግጡ።</p>
+          </div>
+        `;
+      }
     }
 
     function renderBookTabs() {
@@ -274,9 +295,7 @@
       currentChapterIdx = chIdx;
       renderChapters();
       renderChapterContent();
-      if (window.innerWidth <= 768) {
-        document.getElementById('sidebar').classList.remove('open');
-      }
+      toggleDrawer(false); // Close drawer on selection
     }
 
     function renderChapterContent() {
@@ -359,8 +378,20 @@
       `).join('');
     }
 
-    function toggleDrawer() {
-      document.getElementById('sidebar').classList.toggle('open');
+    function toggleDrawer(forceState) {
+      const sidebar = document.getElementById('sidebar');
+      if (typeof forceState === 'boolean') {
+        if (forceState) sidebar.classList.add('open');
+        else sidebar.classList.remove('open');
+      } else {
+        sidebar.classList.toggle('open');
+      }
+    }
+
+    function closeDrawerOnMobile() {
+      if (window.innerWidth <= 768) {
+        document.getElementById('sidebar').classList.remove('open');
+      }
     }
 
     function changeFont(delta) {
