@@ -238,7 +238,7 @@
     let themeIdx = 0;
 
     async function initApp() {
-      const res = await fetch('./senbet_timhirt_bet_books_amharic.json');
+      const res = await fetch('senbet_timhirt_bet_books_amharic.json');
       appData = await res.json();
       document.getElementById('app-title').innerText = appData.app_metadata.app_title;
       renderBookTabs();
