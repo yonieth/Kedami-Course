@@ -5,7 +5,9 @@
     "phone": "0111 55 89 41",
     "po_box": "27314",
     "language": "am",
-    "total_books": 4
+    "total_books": 4,
+    "developer": "Yona Graphics",
+    "developer_phone": "0939899091"
   },
   "books": [
     {
